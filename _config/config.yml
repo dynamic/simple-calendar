@@ -1,0 +1,6 @@
+---
+Name: simplecalendarconfig
+---
+DateField:
+  default_config:
+    showcalendar: true
