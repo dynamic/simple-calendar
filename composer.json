@@ -24,5 +24,11 @@
     "process-timeout": 600
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "extra": {
+    "installer-name": "simple-calendar",
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
 }
