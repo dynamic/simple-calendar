@@ -198,8 +198,9 @@ class EventHolder extends Page
      * @param int $limit
      * @return ArrayList
      */
-    public function getEvents($filter = null, $limit = 10)
+    public function getEvents($filter = null)
     {
+        $limit = $this->EventsPerPage;
         $eventList = ArrayList::create();
         $events = self::getUpcomingEvents($filter, $limit);
         $eventList->merge($events);
