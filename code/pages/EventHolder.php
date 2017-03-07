@@ -173,36 +173,26 @@ class EventHolder extends Page
 
     /**
      * @param array $filter
-     * @param int $limit
      * @return DataList
      */
-    public static function getUpcomingEvents($filter = array(), $limit = 10)
+    public static function getUpcomingEvents($filter = array())
     {
         $filter['Date:GreaterThanOrEqual'] = date('Y-m-d', strtotime('now'));
-        $events = ($limit == 0) ?
-            EventPage::get()
-                ->filter($filter)
-                ->sort('Date', 'ASC')
-
-            :
-            EventPage::get()
-                ->filter($filter)
-                ->limit($limit)
-                ->sort('Date', 'ASC');
+        $events = EventPage::get()
+            ->filter($filter)
+            ->sort('Date', 'ASC');
 
         return $events;
     }
 
     /**
      * @param null $filter
-     * @param int $limit
      * @return ArrayList
      */
     public function getEvents($filter = null)
     {
-        $limit = $this->EventsPerPage;
         $eventList = ArrayList::create();
-        $events = self::getUpcomingEvents($filter, $limit);
+        $events = static::getUpcomingEvents($filter);
         $eventList->merge($events);
         if ($this->ICSFeed) {
             $icsEvents = $this->getFeedEvents();
@@ -238,18 +228,16 @@ class EventHolder_Controller extends Page_Controller
 
     /**
      * @param array $filter
-     * @param int $pageSize
      * @return PaginatedList
      */
-    public function Items($filter = array(), $pageSize = 10)
+    public function Items($filter = array())
     {
-        $filter['ParentID'] = $this->Data()->ID;
-        $class = $this->Data()->stat('item_class');
+        $filter['ParentID'] = $this->data()->ID;
 
         $items = $this->getUpcomingEvents($filter);
 
         $list = PaginatedList::create($items, $this->request);
-        $list->setPageLength($pageSize);
+        $list->setPageLength($this->data()->EventsPerPage);
 
         return $list;
     }
@@ -280,8 +268,6 @@ class EventHolder_Controller extends Page_Controller
      */
     public function getUpcomingEvents($filter = array())
     {
-        $pageSize = ($this->data()->EventsPerPage == 0) ? 10 : $this->data()->EventsPerPage;
-
         $filter['EndDate:GreaterThanOrEqual'] = date('Y-m-d', strtotime('now'));
         if ($this->data()->RangeToShow != 'All Upcoming') {
             $end_date = $this->data()->buildEndDate();
