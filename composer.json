@@ -13,9 +13,7 @@
   "type": "silverstripe-module",
   "license": "BSD-3-Clause",
   "require": {
-    "silverstripe/cms": "^3.2",
-    "silverstripe/framework": "^3.2",
-    "silverstripe/timepickerfield": "^1.0"
+    "silverstripe/recipe-cms": "^1.0"
   },
   "require-dev": {
     "phpunit/PHPUnit": "^3.7"
@@ -28,7 +26,7 @@
   "extra": {
     "installer-name": "simple-calendar",
     "branch-alias": {
-      "dev-master": "2.0.x-dev"
+      "dev-master": "3.0.x-dev"
     }
   }
 }
