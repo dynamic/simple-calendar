@@ -1,15 +1,18 @@
 <?php
 
+namespace Dynamic\Calendar\Pages;
+
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DateField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TimeField;
+use SilverStripe\ORM\ValidationResult;
+
 /**
  * Class EventPage
- *
- * @property Date $Date
- * @property Date $EndDate
- * @property Time $Time
- * @property Time $EndTime
- * @property bool $HideLink
+ * @package Dynamic\Calendar\Pages
  */
-class EventPage extends Page
+class EventPage extends \Page
 {
     /**
      * @var string
@@ -29,20 +32,20 @@ class EventPage extends Page
     /**
      * @var array
      */
-    private static $db = array(
-        'Date' => 'Date',
+    private static $db = [
+        'StartDate' => 'Date',
         'EndDate' => 'Date',
         'Time' => 'Time',
         'EndTime' => 'Time',
         'HideLink' => 'Boolean',
-    );
+    ];
 
     /**
      * @var array
      */
-    private static $defaults = array(
-        'ShowInMenus' => 0
-    );
+    private static $defaults = [
+        'ShowInMenus' => 0,
+    ];
 
     /**
      * @return FieldList
@@ -69,11 +72,11 @@ class EventPage extends Page
         $result = parent::validate();
 
         if ($this->EndTime && ($this->Time > $this->EndTime)) {
-            $result->error('End Time must be later than the Start Time');
+            $result->addError('End Time must be later than the Start Time');
         }
 
         if ($this->EndDate && ($this->Date > $this->EndDate)) {
-            $result->error('End Date must be equal to the Start Date or in the future');
+            $result->addError('End Date must be equal to the Start Date or in the future');
         }
 
         return $result;
@@ -89,11 +92,4 @@ class EventPage extends Page
             $this->EndDate = $this->Date;
         }
     }
-}
-
-/**
- * Class EventPage_Controller
- */
-class EventPage_Controller extends Page_Controller
-{
 }
