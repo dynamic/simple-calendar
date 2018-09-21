@@ -7,16 +7,16 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\NumericField;
 
 /**
- * Class Calendar
+ * Class EventHolder
  * @package Dynamic\Calendar
  */
-class Calendar extends \Page
+class EventHolder extends \Page
 {
     /**
      * @var array
      */
     private static $allowed_children = [
-        'EventPage',
+        EventPage::class,
     ];
 
     /**
@@ -63,7 +63,7 @@ class Calendar extends \Page
             'Root.Main',
             NumericField::create(
                 'EventsPerPage'
-            )->setTitle('Events to show per page (0 shows all based on the "Rage to show")'),
+            )->setTitle('Events to show per page (0 shows all based on the "Range to show")'),
             'Content'
         );
 
