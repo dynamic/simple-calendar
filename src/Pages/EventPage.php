@@ -33,7 +33,7 @@ class EventPage extends \Page
      * @var array
      */
     private static $db = [
-        'StartDate' => 'Date',
+        'Date' => 'Date',
         'EndDate' => 'Date',
         'Time' => 'Time',
         'EndTime' => 'Time',

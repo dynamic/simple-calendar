@@ -2,7 +2,7 @@
 
 namespace Dynamic\Calendar\Pages;
 
-use Nette\Utils\ArrayList;
+use SilverStripe\ORM\ArrayList;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\NumericField;
 
@@ -42,7 +42,7 @@ class EventHolder extends \Page
     /**
      * @var string
      */
-    private static $table_name = 'Calendar';
+    private static $table_name = 'EventHolder';
 
     /**
      * @var array
