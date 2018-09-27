@@ -30,6 +30,11 @@ class EventPage extends \Page
     private static $description = 'Event detail page';
 
     /**
+     * @var string 
+     */
+    private static $table_name = 'EventPage';
+
+    /**
      * @var array
      */
     private static $db = [
