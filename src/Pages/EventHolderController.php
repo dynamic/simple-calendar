@@ -41,7 +41,7 @@ class EventHolderController extends \PageController
             : false;
 
         $events = EventPage::get()
-            ->filter('StartDate:GreaterThanOrEqual', $startDate);
+            ->filter('Date:GreaterThanOrEqual', $startDate);
 
         if ($endDate !== false) {
             $events = $events->filter('EndDate:LessThanOrEqual', $endDate);
